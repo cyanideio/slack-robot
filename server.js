@@ -3,12 +3,6 @@ var utils = require('./lib');
 var args = process.argv.slice(2);
 var http = require('http');
 
-http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Greetings, traveler. What brings you here ?');
-}).listen(80);
-
-console.log('Server running at http://10.211.56.1:8080/');
 
 if (args[0] == 'local') {
     var credentials = require('./config.json');
@@ -27,6 +21,14 @@ if (args[0] == 'online') {
         "slackMaster": process.env.SLACK_MASTER,
         "slackSelf": process.env.SLACK_SELF
     }
+
+    http.createServer((req, res) => {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.end('Greetings, traveler. What brings you here ?');
+    }).listen(80);
+
+    console.log('Server running at http://10.211.56.1:8080/');
+
 }
 
 var bot = new SlackBot({
