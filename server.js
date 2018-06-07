@@ -1,6 +1,24 @@
 var SlackBot = require('slackbots');
 var utils = require('./lib');
-var credentials = require('./config.json');
+var args = process.argv.slice(2);
+if (args[0] == 'local') {
+    var credentials = require('./config.json');
+}
+
+if (args[0] == 'online') {
+    var credentials = { 
+        "accessKeyId": process.env.ACCESS_KEY_ID, 
+        "secretAccessKey": process.env.SECRET_ACCESS_KEY,
+        "spreadsheetId": process.env.SPREADSHEET_ID,
+        "s3Region": process.env.S3_REGION,
+        "s3BucketPath": process.env.S3_BUCKET_PATH,
+        "s3FileName": process.env.S3_FILENAME,
+        "slackToken": process.env.SLACK_TOKEN,
+        "slackBotName": process.env.SLACK_BOT_NAME,
+        "slackMaster": process.env.SLACK_MASTER,
+        "slackSelf": process.env.SLACK_SELF
+    }
+}
 
 var bot = new SlackBot({
     token: credentials.slackToken, 
