@@ -25,9 +25,7 @@ if (args[0] == 'online') {
     http.createServer((req, res) => {
       res.writeHead(200, {'Content-Type': 'text/plain'});
       res.end('Greetings, traveler. What brings you here ?');
-    }).listen(80);
-
-    console.log('Server running at http://10.211.56.1:8080/');
+    }).listen(process.env.PORT);
 
 }
 
